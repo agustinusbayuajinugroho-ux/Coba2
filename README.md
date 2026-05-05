@@ -26,8 +26,7 @@ Ikuti langkah berikut untuk menjalankan project di lokal:
 ### 🔗 Clone Repository
 
 ```bash
-git clone https://github.com/adityaJoestar0988/S1TI_Librabry.git
-cd S1TI_Librabry
+https://github.com/agustinusbayuajinugroho-ux/Coba2.git
 ```
 
 ---
