@@ -8,13 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
-    protected $fillable = [        
-        'book_type_id',
-        'title',
-        'synopsis',
+
+    protected $fillable = [
+        'book_type_id', 
+        'title', 
+        'synopsis', 
         'image'
     ];
 
+    // Relasi: Satu buku memiliki satu tipe buku (Belongs To)
     public function bookType()
     {
         return $this->belongsTo(BookType::class);

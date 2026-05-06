@@ -1,158 +1,58 @@
-# 📚 S1TI Library
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-![Laravel](https://img.shields.io/badge/Laravel-10.x-red)
-![PHP](https://img.shields.io/badge/PHP-8.x-blue)
-![MySQL](https://img.shields.io/badge/MySQL-Database-orange)
-![License](https://img.shields.io/badge/License-MIT-green)
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
----
+## About Laravel
 
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-## ⚙️ Tech Stack
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-* Backend: Laravel
-* Frontend: Blade / Vite / NPM
-* Database: MySQL
-* Tools: Composer, Node.js
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
----
+## Learning Laravel
 
-## ⚙️ Instalasi
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-Ikuti langkah berikut untuk menjalankan project di lokal:
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
----
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-### 🔗 Clone Repository
+## Agentic Development
 
-```bash
-https://github.com/agustinusbayuajinugroho-ux/Coba2.git
-```
-
----
-
-### 📦 Install Dependencies
-
-Pastikan sudah install **Composer & Node.js**
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
 ```bash
-composer install
-npm install
-npm run dev
+composer require laravel/boost --dev
+
+php artisan boost:install
 ```
 
----
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-### ⚙️ Konfigurasi Environment
+## Contributing
 
-Copy file `.env`:
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-```bash
-cp .env.example .env
-```
+## Code of Conduct
 
-Edit file `.env`:
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-```env
-APP_NAME="S1TI Librabry"
-APP_ENV=local
-APP_KEY=base64:J//+jFPy45tDEUHoXqCJ28snFwmhufxs/0gm80hQdkI=
-APP_DEBUG=true
-APP_URL=http://localhost:8000
+## Security Vulnerabilities
 
-APP_LOCALE=en
-APP_FALLBACK_LOCALE=en
-APP_FAKER_LOCALE=id_ID
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=s1ti_library
-DB_USERNAME=root
-DB_PASSWORD=
-DB_ENGINE=InnoDB
-```
+## License
 
-Generate key:
-
-```bash
-php artisan key:generate
-```
-
----
-
-### 🗄️ Setup Database
-
-Buat database baru di phpMyAdmin / MySQL:
-
-```sql
-s1ti_library
-```
-
-Edit file di route:
-
-```
-config/database.php
-```
-
-Ubah config/database.php di bagian mysql:
-
-```php
-'engine' => env('DB_ENGINE', 'InnoDB'),
-```
-
----
-
-### 🔄 Migrasi & Seeder
-
-```bash
-php artisan migrate
-php artisan db:seed
-```
-
----
-
-### 🚀 Jalankan Server
-
-```bash
-php artisan serve
-```
-
-Akses:
-
-```
-http://localhost:8000
-```
-
----
-
-### Setelah semua selesai jalankan
-
-```bash
-php artisan storage:link
-```
-
----
-
-## 🛠️ Troubleshooting
-
-Permission error:
-
-```bash
-chmod -R 775 storage bootstrap/cache
-```
-
-Clear cache:
-
-```bash
-php artisan config:clear
-php artisan cache:clear
-```
-
----
-
-## 📌 Fitur
-
-
-
----
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).

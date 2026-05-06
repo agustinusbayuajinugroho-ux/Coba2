@@ -11,72 +11,75 @@ class BookController extends Controller
 {
     public function index()
     {
+        // Mengambil semua buku beserta relasi tipe bukunya
         $books = Book::with('bookType')->get();
-
         return view('books.index', compact('books'));
     }
 
     public function create()
     {
-        $bookTypes = BookType::get();
+        // Mengambil data tipe buku untuk pilihan dropdown
+        $bookTypes = BookType::all();
         return view('books.form', compact('bookTypes'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'book_type_id' => 'required|integer',
+        $request->validate([
             'title' => 'required|string|max:255',
-            'synopsis' => 'required|string|max:255',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'book_type_id' => 'required|exists:book_types,id',
+            'synopsis' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        $data = $request->except(['_token', '_method']);
+
+        // Logika upload gambar
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('books', 'public');
+            $data['image'] = $request->file('image')->store('books', 'public');
         }
 
-        Book::create($validated);
-
-        return redirect()->route('books.index')->with('success', 'Buku berhasil ditambahkan.');
+        Book::create($data);
+        return redirect()->route('books.index')->with('success', 'Buku berhasil ditambahkan!');
     }
-
-    public function show(string $id) {}
 
     public function edit(Book $book)
     {
-        $bookTypes = BookType::get();
+        $bookTypes = BookType::all();
         return view('books.form', compact('book', 'bookTypes'));
     }
 
     public function update(Request $request, Book $book)
     {
-        $validated = $request->validate([
-            'book_type_id' => 'required|integer',
+        $request->validate([
             'title' => 'required|string|max:255',
-            'synopsis' => 'required|string', // Hapus max:255 agar bisa menampung teks panjang
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'book_type_id' => 'required|exists:book_types,id',
+            'synopsis' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        $data = $request->except(['_token', '_method']);
+
+        // Logika update gambar (hapus gambar lama, simpan yang baru)
         if ($request->hasFile('image')) {
-            if ($book->image && Storage::disk('public')->exists($book->image)) {
+            if ($book->image) {
                 Storage::disk('public')->delete($book->image);
             }
-
-            $validated['image'] = $request->file('image')->store('books', 'public');
+            $data['image'] = $request->file('image')->store('books', 'public');
         }
 
-        //method untuk mengubah data
-        $book->update($validated);
-        return redirect()->route('books.index')->with('success', 'Book berhasil diupdate.');
+        $book->update($data);
+        return redirect()->route('books.index')->with('success', 'Data buku berhasil diperbarui!');
     }
 
     public function destroy(Book $book)
     {
-        if ($book->image && Storage::disk('public')->exists($book->image)) {
+        // Hapus gambar dari storage jika ada
+        if ($book->image) {
             Storage::disk('public')->delete($book->image);
         }
-
+        
         $book->delete();
-        return redirect()->route('books.index')->with('success', 'Book berhasil dihapus.');
+        return redirect()->route('books.index')->with('success', 'Buku berhasil dihapus!');
     }
 }

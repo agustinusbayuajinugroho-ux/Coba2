@@ -7,77 +7,55 @@ use Illuminate\Http\Request;
 
 class BookTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Menampilkan semua data (READ)
     public function index()
     {
-        // $bookTypes = BookType::get();
-        $bookTypes = BookType::paginate(5);
-
+        $bookTypes = BookType::all();
         return view('book-types.index', compact('bookTypes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Menampilkan form tambah data (CREATE)
     public function create()
     {
         return view('book-types.form');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Menyimpan data baru ke database (STORE)
     public function store(Request $request)
     {
-        //validation
+        // Masukkan hasil validasi ke dalam variabel $validated
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
+        // Gunakan variabel $validated, BUKAN $request->all()
         BookType::create($validated);
-
-        return redirect()->route('book-types.index')->with('success', 'Tipe Buku berhasil ditambahkan.');
+        return redirect()->route('book-types.index')->with('success', 'Tipe buku berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
+    // Menampilkan form edit data (EDIT)
     public function edit(BookType $bookType)
     {
         return view('book-types.form', compact('bookType'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    // Memperbarui data di database (UPDATE)
     public function update(Request $request, BookType $bookType)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
 
+        // Gunakan variabel $validated
         $bookType->update($validated);
-        return redirect()->route('book-types.index')->with('success', 'Tipe Buku berhasil diupdate.');
+        return redirect()->route('book-types.index')->with('success', 'Tipe buku berhasil diperbarui!');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     */
+    // Menghapus data (DELETE)
     public function destroy(BookType $bookType)
     {
         $bookType->delete();
-        return redirect()->route('book-types.index')->with('success', 'Tipe Buku berhasil dihapus.');
+        return redirect()->route('book-types.index')->with('success', 'Tipe buku berhasil dihapus!');
     }
 }
